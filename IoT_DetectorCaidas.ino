@@ -28,32 +28,36 @@ void sendSensor()
     float accel_ang_x=atan(a.acceleration.x/sqrt(pow(a.acceleration.y,2) + pow(a.acceleration.z,2)))*(180.0/(3.14));
     float accel_ang_y=atan(a.acceleration.y/sqrt(pow(a.acceleration.x,2) + pow(a.acceleration.z,2)))*(180.0/(3.14));
     float accel_ang_z=atan((sqrt(pow(a.acceleration.x,2)+pow(a.acceleration.y,2)))/a.acceleration.z)*(180.0/(3.14));
+
+    float gyro_ang_x=atan(g.gyro.x/sqrt(pow(g.gyro.y,2) + pow(g.gyro.z,2)))*(180.0/(3.14));
+    float gyro_ang_y=atan(g.gyro.y/sqrt(pow(g.gyro.x,2) + pow(g.gyro.x,2)))*(180.0/(3.14));
+    float gyro_ang_z=atan((sqrt(pow(g.gyro.x,2)+pow(g.gyro.y,2)))/g.gyro.z)*(180.0/(3.14));
     //Imprimo valores:
     Serial.print("AccelX:");
-    Serial.print(a.acceleration.x);
-    Serial.print(",");
+    Serial.print(accel_ang_x);
+    Serial.print("  ");
     Serial.print("AccelY:");
-    Serial.print(a.acceleration.y);
-    Serial.print(",");
+    Serial.print(accel_ang_y);
+    Serial.print("  ");
     Serial.print("AccelZ:");
-    Serial.print(a.acceleration.z);
-    Serial.print(", ");
+    Serial.print(accel_ang_z);
+    Serial.print("  ");
     Serial.print("GyroX:");
-    Serial.print(g.gyro.x);
-    Serial.print(",");
+    Serial.print(gyro_ang_x);
+    Serial.print("  ");
     Serial.print("GyroY:");
-    Serial.print(g.gyro.y);
-    Serial.print(",");
+    Serial.print(gyro_ang_y);
+    Serial.print("  ");
     Serial.print("GyroZ:");
-    Serial.print(g.gyro.z);
+    Serial.print(gyro_ang_z);
     Serial.println("");
     //No enviar mas de 10 valores por segundo!
     Blynk.virtualWrite(V0, accel_ang_x);
     Blynk.virtualWrite(V1, accel_ang_y);
     Blynk.virtualWrite(V2, accel_ang_z);
-    Blynk.virtualWrite(V3, g.gyro.x);
-    Blynk.virtualWrite(V4, g.gyro.y);
-    Blynk.virtualWrite(V5, g.gyro.z);
+    Blynk.virtualWrite(V3, gyro_ang_x);
+    Blynk.virtualWrite(V4, gyro_ang_y);
+    Blynk.virtualWrite(V5, gyro_ang_z);
    delay(100);
   }
 }
